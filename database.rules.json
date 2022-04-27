@@ -31,7 +31,7 @@
         "publicSubmissions": {
           ".read": true,
           "$uid": {
-            ".write": "$uid === auth.uid && data.parent().child('settings').child('acceptingSubmissions').val() === true",
+            ".write": "$uid === auth.uid && data.parent().parent().child('settings').child('acceptingSubmissions').val() === true",
             ".validate": "newData.hasChildren(['submittedAt', 'data'])",
             "submittedAt": {
               ".validate": "newData.isNumber() && newData.val() === now"
