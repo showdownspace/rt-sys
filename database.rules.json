@@ -7,10 +7,31 @@
         "config": {
           ".read": true
         },
-        "publicSubmissions": {
+        "settings": {
+          ".read": true,
+          "acceptingSubmissions": { ".validate": "newData.isBoolean()" }
+        },
+        "profiles": {
           ".read": true,
           "$uid": {
             ".write": "$uid === auth.uid",
+            ".validate": "newData.hasChildren(['name'])",
+            "name": {
+              ".validate": "newData.val() === auth.token.name"
+            }
+          }
+        },
+        "presence": {
+          ".read": true,
+          "$uid": {
+            ".write": "$uid === auth.uid",
+            ".validate": "newData.isNumber() && newData.val() === now"
+          }
+        },
+        "publicSubmissions": {
+          ".read": true,
+          "$uid": {
+            ".write": "$uid === auth.uid && data.parent().child('settings').child('acceptingSubmissions').val() === true",
             ".validate": "newData.hasChildren(['submittedAt', 'data'])",
             "submittedAt": {
               ".validate": "newData.isNumber() && newData.val() === now"
