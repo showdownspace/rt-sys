@@ -1,6 +1,26 @@
 {
   "rules": {
     ".read": false,
-    ".write": false
+    ".write": false,
+    "rooms": {
+      "$roomId": {
+        "config": {
+          ".read": true
+        },
+        "publicSubmissions": {
+          ".read": true,
+          "$uid": {
+            ".write": "$uid === auth.uid",
+            ".validate": "newData.hasChildren(['submittedAt', 'data'])",
+            "submittedAt": {
+              ".validate": "newData.isNumber() && newData.val() === now"
+            },
+            "data": {
+              ".validate": "newData.isString()"
+            }
+          }
+        }
+      }
+    }
   }
 }
