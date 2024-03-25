@@ -4,6 +4,15 @@
     ".write": false,
     "rooms": {
       "$roomId": {
+        ".read": "data.child('admins').child(auth.uid).child('enabled').val() === true",
+        ".write": "data.child('admins').child(auth.uid).child('enabled').val() === true",
+        "admins": {
+          "$uid": {
+            "enabled": {
+              ".validate": "newData.isBoolean()"
+            }
+          }
+        },
         "config": {
           ".read": true
         },
