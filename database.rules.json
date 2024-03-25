@@ -43,6 +43,7 @@
         },
         "privateSubmissions": {
           "$uid": {
+            ".read": "$uid === auth.uid",
             ".write": "$uid === auth.uid && data.parent().parent().child('settings').child('acceptingSubmissions').val() === true",
             ".validate": "newData.hasChildren(['submittedAt', 'data'])",
             "submittedAt": {
